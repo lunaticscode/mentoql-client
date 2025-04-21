@@ -1,12 +1,19 @@
-import Header from "@components/common/Header";
-import { FC, PropsWithChildren } from "react";
+import Header from "./common/Header";
+import { FC, PropsWithChildren, useEffect } from "react";
+import { useLocation, Outlet } from "react-router-dom";
 
 interface RootLayoutProps extends PropsWithChildren {}
-const RootLayout: FC<RootLayoutProps> = ({ children }) => {
+const RootLayout: FC<RootLayoutProps> = () => {
+  const location = useLocation();
+  useEffect(() => {
+    console.log("asdasd");
+  }, [location.pathname]);
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 };
