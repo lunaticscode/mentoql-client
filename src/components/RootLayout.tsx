@@ -1,18 +1,30 @@
-import Header from "./common/Header";
-import { FC, PropsWithChildren, useEffect } from "react";
-import { useLocation, Outlet } from "react-router-dom";
+import NavMenus from "./common/NavMenus";
+import { FC, PropsWithChildren, useMemo, useRef } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import SEO from "./common/SEO";
+import Wave from "./animate/Wave";
 
 interface RootLayoutProps extends PropsWithChildren {}
 const RootLayout: FC<RootLayoutProps> = () => {
+  const contentWrapperRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  useEffect(() => {
-    console.log("asdasd");
-  }, [location.pathname]);
+  const isHomePage = useMemo(
+    () => location.pathname === "/",
+    [location.pathname]
+  );
+
   return (
     <>
-      <Header />
+      <SEO />
+      <Wave />
       <main>
-        <Outlet />
+        <NavMenus />
+        <div
+          ref={contentWrapperRef}
+          className={`page-wrapper ${!isHomePage ? "with-blur" : ""}`.trim()}
+        >
+          <Outlet />
+        </div>
       </main>
     </>
   );

@@ -1,68 +1,124 @@
-/* :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic+Coding:wght@400;700&family=Noto+Sans+KR:wght@100..900&display=swap");
+:root {
+  --nav-menu-color: rgb(135, 135, 135);
+  --app-primary-color: #81debf;
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@media screen and (min-width: 501px) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --aside-width: 200px;
+    --nav-menu-font-size: 22px;
+    --nav-menu-font-empha-size: 26px;
+    --aside-padding: 0px 15px;
   }
-  a:hover {
-    color: #747bff;
+}
+
+@media screen and (max-width: 500px) {
+  :root {
+    --aside-width: 130px;
+    --nav-menu-font-size: 14px;
+    --nav-menu-font-empha-size: 18px;
+    --aside-padding: 0px 8px;
   }
-  button {
-    background-color: #f9f9f9;
+}
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  display: grid;
+  grid-template-columns: var(--aside-width) calc(100% - var(--aside-width));
+}
+
+aside {
+  align-content: center;
+  height: 100vh;
+  padding: var(--aside-padding);
+}
+aside > nav {
+}
+nav > .nav-menu {
+  font-size: var(--nav-menu-font-size);
+  font-weight: bold;
+  color: var(--nav-menu-color);
+  cursor: pointer;
+  text-indent: 10px;
+}
+
+@keyframes de-emphasize-nav-menu {
+  from {
+    font-size: var(--nav-menu-font-empha-size);
+    padding: 10px 0px;
+    color: rgb(201, 201, 201);
   }
-} */
+  to {
+    font-size: var(--nav-menu-font-size);
+    color: var(--nav-menu-color);
+  }
+}
+
+@keyframes emphasize-nav-menu {
+  from {
+    font-size: var(--nav-menu-font-size);
+    color: var(--nav-menu-color);
+  }
+  to {
+    font-size: var(--nav-menu-font-empha-size);
+    padding: 10px 0px;
+    color: rgb(201, 201, 201);
+  }
+}
+
+nav > .nav-menu.current-path {
+  font-size: var(--nav-menu-font-empha-size);
+  padding: 5px 0px;
+  color: var(--app-primary-color);
+  text-indent: 10px;
+  /* background-color: black; */
+  /* backdrop-filter: sepia(50%); */
+  backdrop-filter: blur(30px);
+  width: fit-content;
+  padding-right: 10px;
+  margin: 5px 0px;
+  /* background-color: gray; */
+}
+
+nav > .nav-menu.mouse-out {
+  animation-name: de-emphasize-nav-menu;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+}
+
+nav > .nav-menu.mouse-hover {
+  animation-name: emphasize-nav-menu;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+}
+
+@keyframes blurFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    /* backdrop-filter: contrast(45%); */
+    backdrop-filter: blur(30px);
+    opacity: 1;
+  }
+}
+.page-wrapper.with-blur {
+  /* backdrop-filter: invert(20%); */
+  animation-name: blurFadeIn;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  padding: 20px;
+}
+
+h2.page-title {
+  color: var(--app-primary-color);
+  margin: 0px;
+  margin-bottom: 15px;
+}
