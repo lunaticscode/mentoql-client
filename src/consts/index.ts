@@ -1,4 +1,6 @@
 const API_PROXY_PATH = "/api";
-const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
-
+// const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
+const SERVER_BASE_URL = __VITE_SERVER_BASE_URL__;
+// export const VITE_SERVER_BASE_URL = __VITE_SERVER_BASE_URL__;
+console.log(SERVER_BASE_URL);
 export { API_PROXY_PATH, SERVER_BASE_URL };

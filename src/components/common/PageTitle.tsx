@@ -1,3 +1,5 @@
+import React from 'react';//* by-auto-react-import
+typeof React;//* by-auto-react-import
 import { FC, PropsWithChildren } from "react";
 
 interface PageTitleProps extends PropsWithChildren {}

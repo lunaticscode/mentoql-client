@@ -1,8 +1,10 @@
-import NavMenus from "./common/NavMenus";
+import React from 'react';//* by-auto-react-import
+typeof React;//* by-auto-react-import
+import NavMenus from "./NavMenus";
 import { FC, PropsWithChildren, useMemo, useRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import SEO from "./common/SEO";
-import Wave from "./animate/Wave";
+import SEO from "../common/SEO";
+import Wave from "../animate/Wave";
 
 interface RootLayoutProps extends PropsWithChildren {}
 const RootLayout: FC<RootLayoutProps> = () => {

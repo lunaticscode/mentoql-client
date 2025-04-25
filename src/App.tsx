@@ -1,4 +1,6 @@
-import RootLayout from "./components/RootLayout";
+import React from 'react';//* by-auto-react-import
+typeof React;//* by-auto-react-import
+import RootLayout from "./components/layout/RootLayout";
 import HomePage from "./pages/HomePage";
 import MentoPage from "./pages/mento/MentoPage";
 import MentoSeedPage from "./pages/mento/MentoSeed";

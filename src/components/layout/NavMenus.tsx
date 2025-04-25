@@ -1,3 +1,5 @@
+import React from "react"; //* by-auto-react-import
+typeof React; //* by-auto-react-import
 import { useLocation, useNavigate } from "react-router-dom";
 import { MouseEvent, useRef } from "react";
 
@@ -10,18 +12,32 @@ const navMenus: { path: string; label: string }[] = [
 const NavMenus = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const navRef = useRef<HTMLElement>(null);
+
+  const mouseOverTimer = useRef<NodeJS.Timeout>(null);
+  const mouseLeaveTimer = useRef<NodeJS.Timeout>(null);
 
   const handleMouseOverNavMenu = (e: MouseEvent, path: string) => {
     if (location.pathname === path) return;
-    e.currentTarget.classList.add("mouse-hover");
-    e.currentTarget.classList.remove("mouse-out");
+    if (mouseOverTimer.current) {
+      clearTimeout(mouseOverTimer.current);
+    }
+    mouseOverTimer.current = setTimeout(() => {
+      (e.target as HTMLElement).classList.add("mouse-hover");
+      (e.target as HTMLElement).classList.remove("mouse-out");
+    }, 200);
   };
+
   const handleMouseLeaveNavMenu = (e: MouseEvent, path: string) => {
     if (location.pathname === path) return;
-    e.currentTarget.classList.add("mouse-out");
-    e.currentTarget.classList.remove("mouse-hover");
+
+    if (mouseLeaveTimer.current) {
+      clearTimeout(mouseLeaveTimer.current);
+    }
+    mouseLeaveTimer.current = setTimeout(() => {
+      (e.target as HTMLElement).classList.add("mouse-out");
+      (e.target as HTMLElement).classList.remove("mouse-hover");
+    }, 200);
   };
 
   return (

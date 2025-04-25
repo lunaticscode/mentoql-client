@@ -5,7 +5,7 @@ const _sleep = async (): Promise<void> =>
 const useAuth = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [profile, setProfile] = useState<any>({});
+  const [profile, _setProfile] = useState<any>({});
   const test = async () => {
     await _sleep();
     setIsAuth(true);

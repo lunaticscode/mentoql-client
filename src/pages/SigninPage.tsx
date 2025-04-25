@@ -1,3 +1,5 @@
+import React from 'react';//* by-auto-react-import
+typeof React;//* by-auto-react-import
 type SigninProviders = "google" | "kakao";
 
 const getOauthEntryURL = (provider: SigninProviders, serverBaseUrl: string) => {

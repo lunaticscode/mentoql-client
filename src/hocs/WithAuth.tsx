@@ -1,3 +1,5 @@
+import React from 'react';//* by-auto-react-import
+typeof React;//* by-auto-react-import
 import { ComponentType, PropsWithChildren, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";

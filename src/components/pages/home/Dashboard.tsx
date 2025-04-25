@@ -1,11 +1,13 @@
+import React from 'react';//* by-auto-react-import
+typeof React;//* by-auto-react-import
 const HomeDashboard = () => {
   return (
-    <>
-      <h2>Home Dashboard</h2>
+    <div>
+      <h3>Dashboard</h3>
       <section>Section 1</section>
       <section>Section 2</section>
       <section>Section 3</section>
-    </>
+    </div>
   );
 };
 

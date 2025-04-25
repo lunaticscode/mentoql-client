@@ -1,7 +1,7 @@
 import React from "react"; // for generating-ssg-files
 typeof React; // for generating-ssg-files
 import { resolve, join, dirname } from "node:path";
-import { Plugin } from "vite";
+import { loadEnv, Plugin } from "vite";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import {
@@ -13,7 +13,6 @@ import {
 } from "node:fs";
 
 import { StaticRouter } from "react-router-dom";
-import App from "./src/App";
 
 const mergeNginxConfigFile = (addedConfig: string) => `
 server {
@@ -64,14 +63,31 @@ const ssgGeneratorPlugin = (): Plugin => {
   return {
     name: "vite-plugin-ssg",
     apply: "build",
+    transform(code, id) {
+      if (id.includes("App.tsx")) {
+        const env = loadEnv("production", process.cwd());
+        const serverBaseUrl = JSON.stringify(env.VITE_SERVER_BASE_URL);
+
+        console.log(code, serverBaseUrl);
+      }
+
+      return {
+        code,
+        map: null,
+      };
+    },
     async closeBundle() {
+      const App = (await import("./src/App")).default;
+
       try {
         const pathsToPrerender = ["/", "/signin", "/mento"];
+
         const baseHtmlTemplate = readFileSync(
           resolve(process.cwd(), "dist", "index.html"),
           { encoding: "utf-8" }
         );
         let addedNginxLocatinBlock = "";
+
         for (const path of pathsToPrerender) {
           const pageHtml = renderToStaticMarkup(
             <StaticRouter location={path}>
