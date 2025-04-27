@@ -6,17 +6,17 @@
 @media screen and (min-width: 501px) {
   :root {
     --aside-width: 200px;
-    --nav-menu-font-size: 22px;
-    --nav-menu-font-empha-size: 26px;
+    --nav-menu-font-size: 20px;
+    --nav-menu-font-empha-size: 24px;
     --aside-padding: 0px 15px;
   }
 }
 
 @media screen and (max-width: 500px) {
   :root {
-    --aside-width: 130px;
-    --nav-menu-font-size: 14px;
-    --nav-menu-font-empha-size: 18px;
+    --aside-width: 100px;
+    --nav-menu-font-size: 12px;
+    --nav-menu-font-empha-size: 16px;
     --aside-padding: 0px 8px;
   }
 }

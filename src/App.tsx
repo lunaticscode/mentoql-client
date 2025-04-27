@@ -1,5 +1,5 @@
-import React from 'react';//* by-auto-react-import
-typeof React;//* by-auto-react-import
+import React from "react"; //* by-auto-react-import
+typeof React; //* by-auto-react-import
 import RootLayout from "./components/layout/RootLayout";
 import HomePage from "./pages/HomePage";
 import MentoPage from "./pages/mento/MentoPage";
@@ -8,13 +8,17 @@ import NotFoundaPage from "./pages/NotFoundPage";
 import SchedulePage from "./pages/SchedulePage";
 import SigninPage from "./pages/SigninPage";
 import { Routes, Route } from "react-router-dom";
+import CreateQueryRoom from "./pages/mento/CreateQueryRoom";
+import QueryRoom from "./pages/mento/QueryRoom";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<RootLayout />}>
         <Route index element={<HomePage />} />
+        <Route path="qr/:id" element={<QueryRoom />} />
         <Route path="mento" element={<MentoPage />} />
+        <Route path="mento-cqr" element={<CreateQueryRoom />} />
         <Route path="mento-seed" element={<MentoSeedPage />} />
         <Route path="schedule" element={<SchedulePage />} />
       </Route>
