@@ -2,6 +2,9 @@ import { useState } from "react";
 import { api } from "../../utils/api";
 import { HttpStatusCode } from "axios";
 import {
+  CreateMentoQueryRoomInput,
+  CreateMentoQueryRoomResponse,
+  createMentoQueryRoomResponseSchema,
   InsertMentoSeedInput,
   InsertMentoSeedResponse,
   insertMentoSeedResponseShcmea,
@@ -44,21 +47,22 @@ export const useCreateQueryRoom = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
   const toast = useToast();
-  const request = async (data: InsertMentoSeedInput) => {
+  const request = async (data: CreateMentoQueryRoomInput) => {
     try {
       setIsLoading(true);
-      const apiRequest = await api.post<InsertMentoSeedResponse>(
-        "/mento/qr",
+      const apiRequest = await api.post<CreateMentoQueryRoomResponse>(
+        "/mento/create-qr",
         data
       );
       if (apiRequest.status === HttpStatusCode.Created) {
-        const parsed = insertMentoSeedResponseShcmea.safeParse(apiRequest.data);
+        const parsed = createMentoQueryRoomResponseSchema.safeParse(
+          apiRequest.data
+        );
         if (!parsed.success) {
           setError(new Error("INVALID_INPUT_STATUS"));
           toast("INVALID_INPUT_STATUS");
           return;
         }
-
         return parsed.data;
       }
     } catch (err) {

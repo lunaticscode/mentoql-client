@@ -1,5 +1,3 @@
-import React from 'react';//* by-auto-react-import
-typeof React;//* by-auto-react-import
 import { useNavigate } from "react-router-dom";
 
 const NotFoundaPage = () => {

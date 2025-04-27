@@ -8,7 +8,7 @@ const CreateQueryRoom = () => {
       <PageTitle>Create Query-Room</PageTitle>
       <input />
 
-      <button>Create</button>
+      <button onClick={handleClickCreate}>Create</button>
     </Page>
   );
 };

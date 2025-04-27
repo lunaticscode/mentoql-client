@@ -1,5 +1,3 @@
-import React from 'react';//* by-auto-react-import
-typeof React;//* by-auto-react-import
 import { FC, PropsWithChildren, useEffect, useRef } from "react";
 import { createRoot, Root } from "react-dom/client";
 

@@ -1,5 +1,3 @@
-import React from 'react';//* by-auto-react-import
-typeof React;//* by-auto-react-import
 import { useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import seoData from "../../consts/seo";

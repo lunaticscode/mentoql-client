@@ -1,5 +1,3 @@
-import React from 'react';//* by-auto-react-import
-typeof React;//* by-auto-react-import
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";

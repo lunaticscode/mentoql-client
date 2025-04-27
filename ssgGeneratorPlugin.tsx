@@ -1,7 +1,8 @@
 import React from "react"; // for generating-ssg-files
 typeof React; // for generating-ssg-files
 import { resolve, join, dirname } from "node:path";
-import { loadEnv, Plugin } from "vite";
+import { Plugin } from "vite";
+import { config } from "dotenv";
 import { renderToStaticMarkup } from "react-dom/server";
 
 import {
@@ -63,23 +64,12 @@ const ssgGeneratorPlugin = (): Plugin => {
   return {
     name: "vite-plugin-ssg",
     apply: "build",
-    transform(code, id) {
-      if (id.includes("App.tsx")) {
-        const env = loadEnv("production", process.cwd());
-        const serverBaseUrl = JSON.stringify(env.VITE_SERVER_BASE_URL);
-
-        console.log(code, serverBaseUrl);
-      }
-
-      return {
-        code,
-        map: null,
-      };
-    },
     async closeBundle() {
-      const App = (await import("./src/App")).default;
-
       try {
+        await config();
+        (globalThis as any).VITE_SERVER_BASE_URL =
+          process.env.VITE_SERVER_BASE_URL;
+        const App = (await import("./src/App")).default;
         const pathsToPrerender = ["/", "/signin", "/mento"];
 
         const baseHtmlTemplate = readFileSync(
@@ -120,7 +110,7 @@ const ssgGeneratorPlugin = (): Plugin => {
         );
         console.log("✅ [SSG] Static generation completed.");
       } catch (err) {
-        console.log("❌ closeBundle Error :: ", err);
+        console.error("❌ closeBundle Error ::\n", err);
       } finally {
         recur(resolve(process.cwd(), "src"));
       }

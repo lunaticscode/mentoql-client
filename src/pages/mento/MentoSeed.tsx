@@ -1,5 +1,3 @@
-import React from 'react';//* by-auto-react-import
-typeof React;//* by-auto-react-import
 import { ChangeEvent, useState } from "react";
 import { useInsertMentoSeed } from "../../hooks/api/mento.api";
 import { useToast } from "../../components/common/Toast";

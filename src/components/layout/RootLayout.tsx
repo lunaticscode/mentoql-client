@@ -1,5 +1,3 @@
-import React from 'react';//* by-auto-react-import
-typeof React;//* by-auto-react-import
 import NavMenus from "./NavMenus";
 import { FC, PropsWithChildren, useMemo, useRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";

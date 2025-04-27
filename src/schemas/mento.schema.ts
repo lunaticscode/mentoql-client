@@ -13,7 +13,6 @@ type InsertMentoSeedResponse = z.infer<typeof insertMentoSeedResponseShcmea>;
 
 const createMentoQueryRoomInputSchema = z.object({
   title: z.string(),
-  mentoId: z.string(),
   startDate: z.date(),
   endDate: z.date(),
 });
