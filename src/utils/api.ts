@@ -1,5 +1,5 @@
 import axios, { isAxiosError } from "axios";
-import { API_PROXY_PATH } from "../consts";
+import { API_PROXY_PATH } from "../consts/api";
 
 axios.defaults.baseURL = API_PROXY_PATH;
 axios.defaults.timeout = 10000;

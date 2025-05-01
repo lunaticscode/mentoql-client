@@ -7,14 +7,14 @@ import SchedulePage from "./pages/SchedulePage";
 import SigninPage from "./pages/SigninPage";
 import { Routes, Route } from "react-router-dom";
 import CreateQueryRoom from "./pages/mento/CreateQueryRoom";
-import QueryRoom from "./pages/mento/QueryRoom";
+import QueryRoomPage from "./pages/QueryRoomPage";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<RootLayout />}>
         <Route index element={<HomePage />} />
-        <Route path="qr/:id" element={<QueryRoom />} />
+        <Route path="query-room/:id" element={<QueryRoomPage />} />
         <Route path="mento" element={<MentoPage />} />
         <Route path="mento-cqr" element={<CreateQueryRoom />} />
         <Route path="mento-seed" element={<MentoSeedPage />} />

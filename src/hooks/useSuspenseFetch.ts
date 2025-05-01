@@ -13,8 +13,6 @@ const useSuspenseFetch = <T>(path: string) => {
       .get(`${path}`)
       .then((res) => {
         if (res.status !== HttpStatusCode.Ok) {
-          //   const errorCause = ERROR_CAUSES[res.status] || "DEFAULT";
-          //   const error = getApiError(errorCause);
           const error = new Error("API_ERROR");
           return Promise.reject(error);
         }
@@ -28,9 +26,8 @@ const useSuspenseFetch = <T>(path: string) => {
       .catch((err) => {
         const catchedError =
           err instanceof Error ? err : new Error("API_ERROR");
-        console.log({ catchedError });
+        console.error({ catchedError });
         setStatus("rejected");
-        // return showBoundary(catchedError);
       });
     setStatus("pending");
     setPromise(fetchPromise);

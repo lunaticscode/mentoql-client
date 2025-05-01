@@ -11,34 +11,5 @@ const insertMentoSeedResponseShcmea = commonResponseSchema.merge(z.object({}));
 type InsertMentoSeedInput = z.infer<typeof insertMentoSeedInputSchema>;
 type InsertMentoSeedResponse = z.infer<typeof insertMentoSeedResponseShcmea>;
 
-const createMentoQueryRoomInputSchema = z.object({
-  title: z.string(),
-  startDate: z.date(),
-  endDate: z.date(),
-});
-
-const createMentoQueryRoomResponseSchema = commonResponseSchema.merge(
-  z.object({
-    roomId: z.string(),
-  })
-);
-
-type CreateMentoQueryRoomInput = z.infer<
-  typeof createMentoQueryRoomInputSchema
->;
-type CreateMentoQueryRoomResponse = z.infer<
-  typeof createMentoQueryRoomResponseSchema
->;
-
-export {
-  insertMentoSeedInputSchema,
-  insertMentoSeedResponseShcmea,
-  createMentoQueryRoomInputSchema,
-  createMentoQueryRoomResponseSchema,
-};
-export type {
-  InsertMentoSeedInput,
-  InsertMentoSeedResponse,
-  CreateMentoQueryRoomInput,
-  CreateMentoQueryRoomResponse,
-};
+export { insertMentoSeedInputSchema, insertMentoSeedResponseShcmea };
+export type { InsertMentoSeedInput, InsertMentoSeedResponse };
