@@ -30,6 +30,20 @@ const queryRoomModelSchema = createQueryRoomInputSchema
   })
   .nullable();
 
+const getQueryRoomListInputSchema = z.object({
+  page: z.number().min(1),
+  size: z.number().min(10),
+});
+
+const getQueryRoomListOutputSchema = z.union([
+  commonResponseSchema.extend({
+    isError: z.literal(false),
+    rooms: z.array(queryRoomModelSchema),
+  }),
+  commonResponseSchema.extend({
+    isError: z.literal(true),
+  }),
+]);
 const getQueryRoomOutputSchema = z.union([
   commonResponseSchema.extend({
     isError: z.literal(false),
@@ -40,11 +54,22 @@ const getQueryRoomOutputSchema = z.union([
   }),
 ]);
 
+type GetQueryRoomListInput = z.infer<typeof getQueryRoomListInputSchema>;
+type GetQueryRoomListOutput = z.infer<typeof getQueryRoomListOutputSchema>;
 type GetQueryRoomOutput = z.infer<typeof getQueryRoomOutputSchema>;
 
 export {
   createQueryRoomInputSchema,
   createQueryRoomOutputSchema,
+  getQueryRoomListInputSchema,
+  getQueryRoomListOutputSchema,
   getQueryRoomOutputSchema,
 };
-export type { CreateQueryRoomInput, CreateQueryRoomOutput, GetQueryRoomOutput };
+
+export type {
+  CreateQueryRoomInput,
+  CreateQueryRoomOutput,
+  GetQueryRoomListInput,
+  GetQueryRoomListOutput,
+  GetQueryRoomOutput,
+};

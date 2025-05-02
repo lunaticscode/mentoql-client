@@ -3,7 +3,7 @@ import NotFoundaPage from "./NotFoundPage";
 import { Suspense } from "react";
 import Page from "../components/common/Page";
 import PageTitle from "../components/common/PageTitle";
-import QueryRoomContainer from "../components/pages/queryRoom/QueryRoomContainer";
+import QueryRoomDetail from "../components/pages/queryRoom/QueryRoomDetail";
 
 const QueryRoomLoading = () => {
   return <h2>QueryRoom Loading...</h2>;
@@ -18,7 +18,7 @@ const QueryRoomPage = () => {
     <Page>
       <PageTitle>QueryRoom: {roomId}</PageTitle>
       <Suspense fallback={<QueryRoomLoading />}>
-        <QueryRoomContainer roomId={roomId} />
+        <QueryRoomDetail roomId={roomId} />
       </Suspense>
     </Page>
   );

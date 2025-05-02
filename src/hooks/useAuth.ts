@@ -7,7 +7,7 @@ const useAuth = () => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const [profile, _setProfile] = useState<any>({});
   const test = async () => {
-    await _sleep();
+    // await _sleep();
     setIsAuth(true);
     setIsLoading(false);
   };

@@ -1,6 +1,6 @@
 import RootLayout from "./components/layout/RootLayout";
 import HomePage from "./pages/HomePage";
-import MentoPage from "./pages/mento/MentoPage";
+import MentoPage from "./pages/MentoPage";
 import MentoSeedPage from "./pages/mento/MentoSeed";
 import NotFoundaPage from "./pages/NotFoundPage";
 import SchedulePage from "./pages/SchedulePage";

@@ -1,9 +1,12 @@
-import React from "react"; //* by-auto-react-import
+import React, { Suspense } from "react"; //* by-auto-react-import
 typeof React; //* by-auto-react-import
-import Page from "../../components/common/Page";
-import PageTitle from "../../components/common/PageTitle";
-import WithAuth from "../../hocs/WithAuth";
+import Page from "../components/common/Page";
+import PageTitle from "../components/common/PageTitle";
+import WithAuth from "../hocs/WithAuth";
 import { useNavigate } from "react-router-dom";
+import QueryRoomList, {
+  QueryRoomListLoading,
+} from "../components/pages/queryRoom/QueryRoomList";
 
 const MentoPage = () => {
   const navigate = useNavigate();
@@ -16,6 +19,9 @@ const MentoPage = () => {
       <div>
         <button onClick={handleClickCreateQueryRoom}>질문방 생성</button>
       </div>
+      <Suspense fallback={<QueryRoomListLoading />}>
+        <QueryRoomList />
+      </Suspense>
     </Page>
   );
 };

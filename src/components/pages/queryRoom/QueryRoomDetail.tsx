@@ -11,7 +11,7 @@ interface QueryRoomContainerProps {
   roomId: string;
 }
 
-const QueryRoomContainer: FC<QueryRoomContainerProps> = ({ roomId }) => {
+const QueryRoomDetail: FC<QueryRoomContainerProps> = ({ roomId }) => {
   const { result } = useGetQueryRoom(roomId);
   const [questionInput, setQuestionInput] = useState<CreateQuestionInput>({
     queryRoomId: roomId,
@@ -69,4 +69,4 @@ const QueryRoomContainer: FC<QueryRoomContainerProps> = ({ roomId }) => {
   );
 };
 
-export default QueryRoomContainer;
+export default QueryRoomDetail;
