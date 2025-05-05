@@ -8,4 +8,27 @@ const API_PATH = {
   GET_QUERY_ROOM_BY_ID: (roomId: string) => `/mento/query-room/${roomId}`,
 };
 
-export { API_PROXY_PATH, API_PATH };
+const API_TOAST_MESSAGE = {
+  CREATE_MENTO_SEED: {
+    success: "",
+    error: "",
+  },
+  CREATE_QUERY_ROOM: {
+    success: "",
+    error: "",
+  },
+  GET_QUERY_ROOM_LIST: {
+    success: "",
+    error: "",
+  },
+  CREATE_QUESTION: {
+    success: "",
+    error: "",
+  },
+  GET_QUERY_ROOM_BY_ID: {
+    success: "",
+    error: "",
+  },
+};
+
+export { API_PROXY_PATH, API_PATH, API_TOAST_MESSAGE };

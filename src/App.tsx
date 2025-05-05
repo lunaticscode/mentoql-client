@@ -8,21 +8,32 @@ import SigninPage from "./pages/SigninPage";
 import { Routes, Route } from "react-router-dom";
 import CreateQueryRoom from "./pages/mento/CreateQueryRoom";
 import QueryRoomPage from "./pages/QueryRoomPage";
-
+import { ErrorBoundary } from "react-error-boundary";
+import GlobalErrorPage from "./pages/GlobalErrorPage";
+import SigninSuccessPage from "./pages/SigninSuccessPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+const queryClient = new QueryClient();
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<RootLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path="query-room/:id" element={<QueryRoomPage />} />
-        <Route path="mento" element={<MentoPage />} />
-        <Route path="mento-cqr" element={<CreateQueryRoom />} />
-        <Route path="mento-seed" element={<MentoSeedPage />} />
-        <Route path="schedule" element={<SchedulePage />} />
-      </Route>
-      <Route path="/signin" element={<SigninPage />} />
-      <Route path="*" element={<NotFoundaPage />} />
-    </Routes>
+    <QueryClientProvider client={queryClient}>
+      <ErrorBoundary FallbackComponent={GlobalErrorPage}>
+        <Routes>
+          <Route path="/" element={<RootLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="query-room/:id" element={<QueryRoomPage />} />
+            <Route path="mento" element={<MentoPage />} />
+            <Route path="mento-cqr" element={<CreateQueryRoom />} />
+            <Route path="mento-seed" element={<MentoSeedPage />} />
+            <Route path="schedule" element={<SchedulePage />} />
+          </Route>
+          <Route path="/signin" element={<SigninPage />} />
+          <Route path="/signin-success" element={<SigninSuccessPage />} />
+          <Route path="*" element={<NotFoundaPage />} />
+        </Routes>
+      </ErrorBoundary>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 

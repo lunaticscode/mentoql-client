@@ -1,4 +1,3 @@
-import useSuspenseFetch from "../useSuspenseFetch";
 import { API_PATH } from "../../consts/api";
 import {
   CreateQueryRoomInput,
@@ -8,29 +7,51 @@ import {
   GetQueryRoomListInput,
   GetQueryRoomListOutput,
   getQueryRoomListOutputSchema,
+  getQueryRoomOutputSchema,
 } from "../../schemas/queryRoom.schema";
-
-import { useGetApi, usePostApi } from "./common";
+import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { getApi, postApi } from "./common";
 
 export const useCreateQueryRoom = () => {
-  return usePostApi<CreateQueryRoomInput, CreateQueryRoomOutput>(
-    API_PATH.CREATE_QUERY_ROOM,
-    createQueryRoomOutputSchema
-  );
+  return useMutation({
+    mutationKey: [API_PATH.CREATE_QUERY_ROOM],
+    mutationFn: (data: CreateQueryRoomInput) =>
+      postApi<CreateQueryRoomInput, CreateQueryRoomOutput>(
+        API_PATH.CREATE_QUERY_ROOM,
+        data,
+        createQueryRoomOutputSchema
+      ),
+  });
 };
 
 export const useGetQueryRoomList = (
   initParams: GetQueryRoomListInput = { page: 1, size: 10 },
   shouldFetch: boolean = true
 ) => {
-  return useGetApi<GetQueryRoomListInput, GetQueryRoomListOutput>(
-    API_PATH.GET_QUERY_ROOM_LIST,
-    initParams,
-    getQueryRoomListOutputSchema,
-    shouldFetch
-  );
+  const { refetch: getQueryRoomList, ...restProps } = useQuery({
+    queryKey: [API_PATH.GET_QUERY_ROOM_LIST, initParams.page, initParams.size],
+    queryFn: () =>
+      getApi<GetQueryRoomListInput, GetQueryRoomListOutput>(
+        API_PATH.GET_QUERY_ROOM_LIST,
+        initParams,
+        getQueryRoomListOutputSchema
+      ),
+    enabled: shouldFetch,
+  });
+  return {
+    ...restProps,
+    getQueryRoomList,
+  };
 };
 
 export const useGetQueryRoom = (roomId: string) => {
-  return useSuspenseFetch<GetQueryRoomOutput>(`/query-room/${roomId}`);
+  return useSuspenseQuery({
+    queryKey: [`/query-room/${roomId}`],
+    queryFn: () =>
+      getApi<{}, GetQueryRoomOutput>(
+        `/query-room/${roomId}`,
+        {},
+        getQueryRoomOutputSchema
+      ),
+  });
 };

@@ -12,7 +12,8 @@ import {
 
 const CreateQueryRoom = () => {
   const toast = useToast();
-  const { request: createQueryRoom, isLoading } = useCreateQueryRoom();
+  const { mutateAsync: createQueryRoom, isPending: isLoading } =
+    useCreateQueryRoom();
   const [queryRoomInput, setQueryRoomInput] = useState<CreateQueryRoomInput>({
     title: "",
     description: "",

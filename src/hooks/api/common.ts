@@ -2,13 +2,54 @@ import { useEffect, useState } from "react";
 import { useToast } from "../../components/common/Toast";
 import { api } from "../../utils/api";
 import { HttpStatusCode } from "axios";
-import { ZodObject, ZodUnion } from "zod";
-type OutputSchema = ZodObject<any> | ZodUnion<any>;
+import { ZodObject } from "zod";
+
+type OutputSchema = ZodObject<any>;
+
+export const getApi = async <Input, Output>(
+  path: string,
+  params: Input,
+  outputSchema: OutputSchema
+) => {
+  try {
+    const apiRequest = await api.get<Output>(path, { params });
+    if (apiRequest.status === HttpStatusCode.Ok) {
+      const parsed = outputSchema.safeParse(apiRequest.data);
+      if (!parsed.success) {
+        throw new Error("INVALID_OUTPUT_STATUS");
+      }
+      return apiRequest.data;
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const postApi = async <Input, Output>(
+  path: string,
+  data: Input,
+  outputSchema: OutputSchema
+) => {
+  try {
+    const apiRequest = await api.post<Output>(path, data);
+    if (apiRequest.status === HttpStatusCode.Created) {
+      const parsed = outputSchema.safeParse(apiRequest.data);
+      if (!parsed.success) {
+        throw new Error("INVALID_OUTPUT_STATUS");
+      }
+      return apiRequest.data;
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
 const useGetApi = <Input, Output>(
   path: string,
   initParams: Input,
   outputSchema: OutputSchema,
-  shouldFetch: boolean
+  shouldFetch: boolean,
+  toastMessage?: { success: string; error: string }
 ) => {
   const [result, setResult] = useState<Output>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -22,14 +63,22 @@ const useGetApi = <Input, Output>(
       if (apiRequest.status === HttpStatusCode.Ok) {
         const parsed = outputSchema.safeParse(apiRequest.data);
         if (!parsed.success) {
+          if (toastMessage) {
+            toast(toastMessage.error);
+          }
           setError(new Error("INVALID_OUTPUT_STATUS"));
           return;
+        }
+        if (toastMessage) {
+          toast(toastMessage.success);
         }
         setResult(parsed.data as Output);
       }
     } catch (err) {
       console.error(err);
-      toast("UNKNOWN_ERROR");
+      if (toastMessage) {
+        toast(toastMessage.error);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -49,7 +98,8 @@ const useGetApi = <Input, Output>(
 
 const usePostApi = <Input, Output>(
   path: string,
-  outputSchema: OutputSchema
+  outputSchema: OutputSchema,
+  toastMessage?: { success: string; error: string }
 ) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
@@ -61,13 +111,22 @@ const usePostApi = <Input, Output>(
       if (apiRequest.status === HttpStatusCode.Created) {
         const parsed = outputSchema.safeParse(apiRequest.data);
         if (!parsed.success) {
+          if (toastMessage) {
+            toast(toastMessage.error);
+          }
           setError(new Error("INVALID_OUTPUT_STATUS"));
           return;
+        }
+        if (toastMessage) {
+          toast(toastMessage.success);
         }
         return parsed.data as Output;
       }
     } catch (err) {
       console.error(err);
+      if (toastMessage) {
+        toast(toastMessage.error);
+      }
       toast("UNKNOWN_ERROR");
     } finally {
       setIsLoading(false);

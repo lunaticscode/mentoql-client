@@ -12,19 +12,18 @@ interface QueryRoomContainerProps {
 }
 
 const QueryRoomDetail: FC<QueryRoomContainerProps> = ({ roomId }) => {
-  const { result } = useGetQueryRoom(roomId);
+  const { data } = useGetQueryRoom(roomId);
   const [questionInput, setQuestionInput] = useState<CreateQuestionInput>({
     queryRoomId: roomId,
     content: "",
   });
   const { request: createQuestion, isLoading } = useCreateQuestion();
 
-  if (!result) return null;
-  if (!result.queryRoom) {
+  if (!data) return null;
+  if (!data.queryRoom) {
     return <NotFoundaPage />;
   }
-  const { title, description, startDate, endDate, questions } =
-    result.queryRoom;
+  const { title, description, startDate, endDate, questions } = data.queryRoom;
 
   const handleClickSubmitQuestion = async () => {
     const parsed = createQuestionInputSchema.safeParse(questionInput);
