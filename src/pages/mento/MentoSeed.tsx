@@ -24,8 +24,10 @@ const MentoSeed = () => {
     console.log(data);
     try {
       const result = await request(data);
-      if (result && !result.isError) {
+      if (result?.insertCnt) {
         toast("Success to insert mento-seed");
+      } else {
+        toast("(!) Failed to insert mento-seed");
       }
     } catch (err) {
       console.error(err);

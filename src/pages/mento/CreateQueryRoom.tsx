@@ -26,10 +26,8 @@ const CreateQueryRoom = () => {
     }
     try {
       const createResult = await createQueryRoom(parsed.data);
-
-      if (!createResult || createResult?.isError) {
+      if (!createResult?.roomId) {
         toast("(!) Failed to create query-room");
-        return;
       } else {
         const roomId = createResult.roomId;
         toast(`Success to create query-room :: ${roomId}`);
@@ -39,6 +37,7 @@ const CreateQueryRoom = () => {
       toast("(!) Failed to create query-room");
     }
   };
+
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value;
     setQueryRoomInput((prev) => ({ ...prev, title }));

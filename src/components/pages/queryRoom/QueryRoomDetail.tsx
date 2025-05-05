@@ -20,10 +20,11 @@ const QueryRoomDetail: FC<QueryRoomContainerProps> = ({ roomId }) => {
   const { request: createQuestion, isLoading } = useCreateQuestion();
 
   if (!result) return null;
-  if (result.isError || !result.queryRoom) {
+  if (!result.queryRoom) {
     return <NotFoundaPage />;
   }
-  const { title, description, startDate, endDate } = result.queryRoom;
+  const { title, description, startDate, endDate, questions } =
+    result.queryRoom;
 
   const handleClickSubmitQuestion = async () => {
     const parsed = createQuestionInputSchema.safeParse(questionInput);
@@ -64,6 +65,25 @@ const QueryRoomDetail: FC<QueryRoomContainerProps> = ({ roomId }) => {
         <button disabled={isLoading} onClick={handleClickSubmitQuestion}>
           Submit Question
         </button>
+      </div>
+      <div
+        style={{
+          height: "5px",
+          display: "block",
+          backgroundColor: "salmon",
+          margin: "15px 0px",
+        }}
+      />
+      <div>
+        {questions?.map((question, index) => (
+          <div style={{ marginBottom: "10px" }} key={`question-key-${index}`}>
+            <div style={{ color: "white", backgroundColor: "black" }}>
+              {question.content}
+            </div>
+            <div>{question.createdAt}</div>
+            <div>{question.owner}</div>
+          </div>
+        ))}
       </div>
     </div>
   );

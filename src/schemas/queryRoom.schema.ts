@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { commonResponseSchema } from "./common.schema";
+import { questionOutputSchema } from "./question.schema";
 
 const createQueryRoomInputSchema = z.object({
   title: z.string().min(5),
@@ -8,51 +8,34 @@ const createQueryRoomInputSchema = z.object({
   endDate: z.date(),
 });
 
-const createQueryRoomOutputSchema = z.union([
-  commonResponseSchema.extend({
-    isError: z.literal(false),
-    roomId: z.string(),
-  }),
-  commonResponseSchema.extend({
-    isError: z.literal(true),
-  }),
-]);
+const createQueryRoomOutputSchema = z.object({ roomId: z.string() });
 
 type CreateQueryRoomInput = z.infer<typeof createQueryRoomInputSchema>;
 type CreateQueryRoomOutput = z.infer<typeof createQueryRoomOutputSchema>;
 
-const queryRoomModelSchema = createQueryRoomInputSchema
-  .extend({
-    startDate: z.string(),
-    endDate: z.string(),
-    roomId: z.string(),
-    owner: z.string(),
-  })
-  .nullable();
+const queryRoomModelSchema = createQueryRoomInputSchema.extend({
+  startDate: z.string(),
+  endDate: z.string(),
+  roomId: z.string(),
+  owner: z.string(),
+});
+
+const queryRoomDetailModelSchema = queryRoomModelSchema.extend({
+  questions: z.array(questionOutputSchema),
+});
 
 const getQueryRoomListInputSchema = z.object({
   page: z.number().min(1),
   size: z.number().min(10),
 });
 
-const getQueryRoomListOutputSchema = z.union([
-  commonResponseSchema.extend({
-    isError: z.literal(false),
-    rooms: z.array(queryRoomModelSchema),
-  }),
-  commonResponseSchema.extend({
-    isError: z.literal(true),
-  }),
-]);
-const getQueryRoomOutputSchema = z.union([
-  commonResponseSchema.extend({
-    isError: z.literal(false),
-    queryRoom: queryRoomModelSchema,
-  }),
-  commonResponseSchema.extend({
-    isError: z.literal(true),
-  }),
-]);
+const getQueryRoomListOutputSchema = z.object({
+  rooms: z.array(queryRoomModelSchema),
+});
+
+const getQueryRoomOutputSchema = z.object({
+  queryRoom: queryRoomDetailModelSchema,
+});
 
 type GetQueryRoomListInput = z.infer<typeof getQueryRoomListInputSchema>;
 type GetQueryRoomListOutput = z.infer<typeof getQueryRoomListOutputSchema>;
