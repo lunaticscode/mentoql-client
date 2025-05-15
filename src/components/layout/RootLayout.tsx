@@ -1,8 +1,7 @@
-import NavMenus from "./NavMenus";
 import { FC, PropsWithChildren, useEffect, useMemo, useRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import SEO from "../common/SEO";
-import Wave from "../animate/Wave";
+import Header from "./Header";
 
 interface RootLayoutProps extends PropsWithChildren {}
 const RootLayout: FC<RootLayoutProps> = () => {
@@ -21,9 +20,8 @@ const RootLayout: FC<RootLayoutProps> = () => {
   return (
     <>
       <SEO />
-      <Wave />
+      <Header />
       <main>
-        <NavMenus />
         <div
           ref={contentWrapperRef}
           className={`page-wrapper ${!isHomePage ? "with-blur" : ""}`.trim()}
