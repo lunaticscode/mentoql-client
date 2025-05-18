@@ -1,17 +1,31 @@
+import { useState } from "react";
 import Page from "../components/common/Page";
 import PageTitle from "../components/common/PageTitle";
 import Paginator from "../components/common/Paginator";
 
 const SchedulePage = () => {
-  const handleChangePage = () => {};
+  const [page, setPage] = useState<number>(1);
+  const handleChangePage = (page: number) => {
+    setPage(page);
+  };
   return (
     <Page>
       <PageTitle>SchedulePage</PageTitle>
       <Paginator.Root
-        page={0}
+        page={page}
         onChangePage={handleChangePage}
-        itemCount={10}
-      ></Paginator.Root>
+        itemCount={376}
+      >
+        <Paginator.Buttons />
+        <Paginator.Navigator>
+          {(prev, next) => (
+            <div>
+              <span onClick={prev}>이전</span>
+              <span onClick={next}>다음</span>
+            </div>
+          )}
+        </Paginator.Navigator>
+      </Paginator.Root>
     </Page>
   );
 };

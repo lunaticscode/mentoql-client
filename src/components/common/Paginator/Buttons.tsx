@@ -1,9 +1,16 @@
-import { useId } from "react";
+import { FC, ReactNode, useId } from "react";
 import usePaginator from "./hooks/usePaginator";
 import PageButton from "./internal/PageButton";
 import { usePaginatorContext } from "./Root";
 
-const Buttons = () => {
+interface PaginatorButtonsProps {
+  children?: (
+    pages: number[],
+    handleClickPage: (page: number) => void
+  ) => ReactNode;
+}
+const Buttons: FC<PaginatorButtonsProps> = (props) => {
+  const { children } = props;
   const _componentId = useId();
   const { currentPage, handleChangePage } = usePaginatorContext();
   const { pages } = usePaginator();
@@ -11,6 +18,9 @@ const Buttons = () => {
   const onClickPageButton = (page: number) => {
     handleChangePage(page);
   };
+  if (children && typeof children === "function") {
+    return children(pages, onClickPageButton);
+  }
   return (
     <div className={"paginator-page-buttons"}>
       {pages.map((page) => (
