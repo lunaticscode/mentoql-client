@@ -1,21 +1,67 @@
-import { FC, PropsWithChildren, useState } from "react";
+import { createContext, FC, PropsWithChildren, useMemo } from "react";
+import useUIContext from "../../../hooks/useUIContext";
+import { CalendarMode } from "./types";
+import { isEqualByMode } from "./utils";
+import useControlledValue from "../../../hooks/useControlledValue";
 
-type CalendarModes = "month" | "week" | "year";
+interface CalendarContextProps {
+  currentMode: CalendarMode;
+  handleChangeMode?: (mode: CalendarMode) => void;
+  currentDate: Date;
+  handleChangeDate: (date: Date) => void;
+}
+
+const CalendarContext = createContext<CalendarContextProps | null>(null);
+export const useCalendarContext = () =>
+  useUIContext(CalendarContext, "Calendar");
 
 interface CalendarRootProps extends PropsWithChildren {
-  mode?: CalendarModes;
-  value: Date;
-  onChange: (date: Date) => void;
+  defaultMode?: CalendarMode;
+  mode?: CalendarMode;
+  onChangeMode?: (mode: CalendarMode) => void;
+  defaultDate?: Date;
+  date?: Date;
+  onChangeDate?: (date: Date) => void;
 }
 
 const Root: FC<CalendarRootProps> = (props) => {
-  const { mode = "month", value, onChange } = props;
-  const [currentDate, setCurrentDate] = useState<Date>(value);
+  const {
+    defaultMode = "month",
+    mode = "month",
+    onChangeMode,
+    date,
+    defaultDate,
+    onChangeDate,
+  } = props;
 
-  const handleSelectDate = () => {
+  const { value: currentMode = "month", setValue: setCurrentMode } =
+    useControlledValue(mode, defaultMode);
 
-  }
-  
-  return <></>;
+  const { value: currentDate = new Date(), setValue: setCurrentDate } =
+    useControlledValue(date, defaultDate);
+
+  const handleChangeDate = (changedDate: Date) => {
+    if (isEqualByMode(currentDate, changedDate, currentMode)) return;
+    setCurrentDate(changedDate);
+    onChangeDate?.(changedDate);
+  };
+
+  const handleChangeMode = (changedMode: CalendarMode) => {
+    setCurrentMode(changedMode);
+    onChangeMode?.(changedMode);
+  };
+
+  const contextValue: CalendarContextProps = useMemo(
+    () => ({
+      currentMode,
+      handleChangeMode,
+      currentDate,
+      handleChangeDate,
+    }),
+    [mode, currentDate]
+  );
+  return (
+    <CalendarContext.Provider value={contextValue}></CalendarContext.Provider>
+  );
 };
 export default Root;

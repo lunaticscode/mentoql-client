@@ -1,4 +1,5 @@
 const useCalendarDate = () => {
-  return {};
+  const dates: Date[] = [];
+  return { dates };
 };
 export default useCalendarDate;
