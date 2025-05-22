@@ -32,6 +32,7 @@ const Root: FC<CalendarRootProps> = (props) => {
     date,
     defaultDate,
     onChangeDate,
+    children,
   } = props;
 
   const { value: currentMode = "month", setValue: setCurrentMode } =
@@ -61,7 +62,9 @@ const Root: FC<CalendarRootProps> = (props) => {
     [mode, currentDate]
   );
   return (
-    <CalendarContext.Provider value={contextValue}></CalendarContext.Provider>
+    <CalendarContext.Provider value={contextValue}>
+      {children}
+    </CalendarContext.Provider>
   );
 };
 export default Root;

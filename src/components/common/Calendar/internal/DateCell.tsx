@@ -1,18 +1,23 @@
 import { FC, useMemo } from "react";
+import { getMemorizedRule, renderDisplayDateByMode } from "../utils";
+import { CalendarMode } from "../types";
 import { useCalendarContext } from "../Root";
-import { getMemorizedRule, renderDateCellByMode } from "../utils";
 
 interface CalendarDateCellProps {
   date: Date;
+  mode: CalendarMode;
 }
 
 const DateCell: FC<CalendarDateCellProps> = (props) => {
-  const { currentMode } = useCalendarContext();
-  const { date } = props;
+  const { handleChangeDate } = useCalendarContext();
+  const { date, mode } = props;
   const dateCell = useMemo(
-    () => renderDateCellByMode(date, currentMode),
-    [currentMode, getMemorizedRule(date, currentMode)]
+    () => renderDisplayDateByMode(date, mode, "datecell"),
+    [mode, getMemorizedRule(date, mode)]
   );
-  return <div>{dateCell}</div>;
+  const handleClickDateCell = () => {
+    handleChangeDate(date);
+  };
+  return <div onClick={handleClickDateCell}>{dateCell}</div>;
 };
 export default DateCell;

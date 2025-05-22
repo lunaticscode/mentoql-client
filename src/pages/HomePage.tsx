@@ -1,3 +1,4 @@
+import Calendar from "../components/common/Calendar";
 import Page from "../components/common/Page";
 import PageTitle from "../components/common/PageTitle";
 import { useToast } from "../components/common/Toast";
@@ -10,6 +11,9 @@ const HomePage = () => {
     <Page>
       <button onClick={() => toast("asdasdasd")}>toast</button>
       <PageTitle>HomePage</PageTitle>
+      <Calendar.Root defaultDate={new Date()}>
+        <Calendar.Body />
+      </Calendar.Root>
       <HomeDashboard />
     </Page>
   );
