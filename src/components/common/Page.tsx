@@ -1,7 +1,8 @@
 import { FC, PropsWithChildren } from "react";
-interface PageProps extends PropsWithChildren {}
+import { pageContainer } from "../../styles/layout/page.css";
 
+interface PageProps extends PropsWithChildren {}
 const Page: FC<PageProps> = ({ children }) => {
-  return <div className="page-content-wrapper">{children}</div>;
+  return <div className={pageContainer}>{children}</div>;
 };
 export default Page;
