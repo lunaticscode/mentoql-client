@@ -17,6 +17,24 @@ const appQueryClient = new QueryClient({
         }
         return false;
       },
+      retryDelay: (failureCount, error) => {
+        if (isAxiosError(error)) {
+          const retryAfterHeader = error.response?.headers["retry-after"];
+          // retry-after number, date 기준으로 처리
+          if (retryAfterHeader) {
+            const parsed = parseInt(retryAfterHeader, 10);
+            if (!isNaN(parsed)) {
+              return parsed * 1000;
+            }
+            const retryTimemillis = new Date(retryAfterHeader).getTime();
+            if (!isNaN(retryTimemillis)) {
+              const currentTime = new Date().getTime();
+              return Math.max(retryTimemillis - currentTime, 0);
+            }
+          }
+        }
+        return Math.min(1000 * 2 ** failureCount, 30000);
+      },
     },
     mutations: {
       retry: false,
