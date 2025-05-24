@@ -2,6 +2,7 @@ import { FC, ReactNode, useId } from "react";
 import usePaginator from "./hooks/usePaginator";
 import PageButton from "./internal/PageButton";
 import { usePaginatorContext } from "./Root";
+import { paginatorPageButtonContainer } from "../../../styles/components/paginator.css.ts";
 
 interface PaginatorButtonsProps {
   children?: (
@@ -22,7 +23,7 @@ const Buttons: FC<PaginatorButtonsProps> = (props) => {
     return children(pages, onClickPageButton);
   }
   return (
-    <div className={"paginator-page-buttons"}>
+    <div className={paginatorPageButtonContainer}>
       {pages.map((page) => (
         <PageButton
           onClick={() => onClickPageButton(page)}

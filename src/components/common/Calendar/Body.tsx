@@ -3,7 +3,11 @@ import useCalendarDate from "./hooks/useCalendarDate";
 import DateCell from "./internal/DateCell";
 import { useCalendarContext } from "./Root";
 import { CalendarMode } from "./types";
-
+import {
+  calendarBody,
+  calendarWeekContainer,
+  calendarDateContainer,
+} from "../../../styles/components/calendar.css.ts";
 const isTwoDimsTable = (mode: CalendarMode) => {
   const twoDimsModes: CalendarMode[] = ["month", "year"];
   return twoDimsModes.includes(mode);
@@ -17,9 +21,15 @@ const Body: FC<CalendarBodyProps> = () => {
 
   const renderTwoDimsCalendar = useCallback(() => {
     return (dates as Date[][]).map((week, weekIndex) => (
-      <div key={`calendar-week-key-${weekIndex}`}>
+      <div
+        className={calendarWeekContainer}
+        key={`calendar-week-key-${weekIndex}`}
+      >
         {week.map((date, dateIndex) => (
-          <div key={`calendar-date-key-${dateIndex}`}>
+          <div
+            className={calendarDateContainer}
+            key={`calendar-date-key-${dateIndex}`}
+          >
             <DateCell date={date} mode={currentMode} />
           </div>
         ))}
@@ -36,7 +46,9 @@ const Body: FC<CalendarBodyProps> = () => {
   }, [dates, currentMode]);
 
   return (
-    <div>{isTwoDims ? renderTwoDimsCalendar() : renderOneDimsCalendar()}</div>
+    <div className={calendarBody}>
+      {isTwoDims ? renderTwoDimsCalendar() : renderOneDimsCalendar()}
+    </div>
   );
 };
 export default Body;

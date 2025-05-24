@@ -1,11 +1,5 @@
-import {
-  cloneElement,
-  FC,
-  PropsWithChildren,
-  ReactElement,
-  ReactNode,
-} from "react";
-import { pageContainer, pageTitle } from "../../styles/layout/page.css";
+import { FC, PropsWithChildren, ReactNode } from "react";
+import { pageContainer, pageTitle } from "../../styles/layout/page.css.ts";
 
 interface PageContainerProps extends PropsWithChildren {}
 const Container: FC<PageContainerProps> = ({ children }) => {

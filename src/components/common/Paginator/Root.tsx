@@ -1,5 +1,6 @@
 import { createContext, FC, PropsWithChildren, useMemo, useState } from "react";
 import useUIContext from "../../../hooks/useUIContext";
+import { paginatorContainer } from "../../../styles/components/paginator.css";
 
 interface PaginatorRootProps extends PropsWithChildren {
   page: number;
@@ -67,7 +68,7 @@ const PaginatorRoot: FC<PaginatorRootProps> = (props) => {
 
   return (
     <PaginatorContext.Provider value={contextValue}>
-      {children}
+      <div className={paginatorContainer}>{children}</div>
     </PaginatorContext.Provider>
   );
 };

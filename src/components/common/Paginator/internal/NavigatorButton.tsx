@@ -1,4 +1,5 @@
 import { FC, DetailedHTMLProps } from "react";
+import { paginatorNavigator } from "../../../../styles/components/paginator.css.ts";
 type NavigatorDirections = "prev" | "next";
 interface NavigatorButtonProps
   extends Pick<
@@ -15,7 +16,7 @@ const NavigatorButton: FC<NavigatorButtonProps> = (props) => {
   const { direction, ...htmlProps } = props;
 
   return (
-    <button className={"paginator-basic-navigator-button"} {...htmlProps}>
+    <button className={paginatorNavigator} {...htmlProps}>
       {direction}
     </button>
   );

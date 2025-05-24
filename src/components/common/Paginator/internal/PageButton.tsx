@@ -1,4 +1,5 @@
 import { DetailedHTMLProps, FC } from "react";
+import { paginatorPageButton } from "../../../../styles/components/paginator.css.ts";
 
 interface PageButtonProps
   extends Pick<
@@ -14,11 +15,7 @@ interface PageButtonProps
 const PageButton: FC<PageButtonProps> = (props) => {
   const { page, active, ...htmlProps } = props;
   return (
-    <button
-      data-active={active}
-      className={"paginator-basic-button"}
-      {...htmlProps}
-    >
+    <button data-active={active} className={paginatorPageButton} {...htmlProps}>
       {page}
     </button>
   );

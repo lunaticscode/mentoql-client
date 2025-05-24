@@ -4,7 +4,7 @@ import { themeVars } from "./index.css";
 export const darkThemeClass = createTheme(themeVars, {
   color: {
     primary: "#3cf628",
-    secondary: "#C084FC",
+    secondary: "#2b3452",
     ghost: "#1F2937",
     white: "#121826",
     black: "#FFFFFF",

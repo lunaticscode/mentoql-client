@@ -3,7 +3,7 @@ import useUIContext from "../../../hooks/useUIContext";
 import { CalendarMode } from "./types";
 import { isEqualByMode } from "./utils";
 import useControlledValue from "../../../hooks/useControlledValue";
-
+import { calendarContainer } from "../../../styles/components/calendar.css.ts";
 interface CalendarContextProps {
   currentMode: CalendarMode;
   handleChangeMode?: (mode: CalendarMode) => void;
@@ -63,7 +63,7 @@ const Root: FC<CalendarRootProps> = (props) => {
   );
   return (
     <CalendarContext.Provider value={contextValue}>
-      {children}
+      <div className={calendarContainer}>{children}</div>
     </CalendarContext.Provider>
   );
 };
