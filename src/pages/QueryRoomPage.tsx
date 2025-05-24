@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import NotFoundaPage from "./NotFoundPage";
 import { Suspense } from "react";
 import Page from "../components/common/Page";
-import PageTitle from "../components/common/PageTitle";
 import QueryRoomDetail from "../components/pages/queryRoom/QueryRoomDetail";
 
 const QueryRoomLoading = () => {
@@ -15,12 +14,12 @@ const QueryRoomPage = () => {
     return <NotFoundaPage />;
   }
   return (
-    <Page>
-      <PageTitle>QueryRoom: {roomId}</PageTitle>
+    <Page.Container>
+      <Page.Title>QueryRoom: {roomId}</Page.Title>
       <Suspense fallback={<QueryRoomLoading />}>
         <QueryRoomDetail roomId={roomId} />
       </Suspense>
-    </Page>
+    </Page.Container>
   );
 };
 export default QueryRoomPage;

@@ -38,6 +38,7 @@ export const useGetQueryRoomList = (
       ),
     enabled: shouldFetch,
   });
+  console.log(restProps.error);
   return {
     ...restProps,
     getQueryRoomList,

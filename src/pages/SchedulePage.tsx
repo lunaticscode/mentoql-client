@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Page from "../components/common/Page";
-import PageTitle from "../components/common/PageTitle";
 import Paginator from "../components/common/Paginator";
 
 const SchedulePage = () => {
@@ -9,8 +8,8 @@ const SchedulePage = () => {
     setPage(page);
   };
   return (
-    <Page>
-      <PageTitle>SchedulePage</PageTitle>
+    <Page.Container>
+      <Page.Title>SchedulePage</Page.Title>
       <Paginator.Root
         page={page}
         onChangePage={handleChangePage}
@@ -26,7 +25,7 @@ const SchedulePage = () => {
           )}
         </Paginator.Navigator>
       </Paginator.Root>
-    </Page>
+    </Page.Container>
   );
 };
 export default SchedulePage;

@@ -17,7 +17,7 @@ const QueryRoomList = () => {
     [searchParams]
   );
   console.log(page, size);
-  const { data, getQueryRoomList } = useGetQueryRoomList({ page, size });
+  const { data, getQueryRoomList } = useGetQueryRoomList({ page, size }, true);
 
   const handleClickNextPage = () => {
     const nextPage = page + 1;

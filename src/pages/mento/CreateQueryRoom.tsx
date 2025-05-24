@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import Page from "../../components/common/Page";
-import PageTitle from "../../components/common/PageTitle";
+
 import { convertDateToString } from "../../utils/date";
 import { useCreateQueryRoom } from "../../hooks/api/queryRoom.api";
 
@@ -61,8 +61,8 @@ const CreateQueryRoom = () => {
     .safeParse(queryRoomInput)
     .error?.format();
   return (
-    <Page>
-      <PageTitle>Create Query-Room</PageTitle>
+    <Page.Container>
+      <Page.Title>Create Query-Room</Page.Title>
       <input value={queryRoomInput.title} onChange={handleChangeTitle} />
       <div>{inputErrorFormat?.title?._errors?.[0]}</div>
       <textarea
@@ -85,7 +85,7 @@ const CreateQueryRoom = () => {
       <button disabled={isLoading} onClick={handleClickCreate}>
         Create
       </button>
-    </Page>
+    </Page.Container>
   );
 };
 export default CreateQueryRoom;

@@ -4,9 +4,11 @@ import {
   headerLogo,
   headerNavMenusContainer,
   headerNavMenu,
+  headerSpot,
 } from "../../styles/layout/header.css.ts";
 import { lightThemeClass } from "../../styles/theme/light.css.ts";
 import { darkThemeClass } from "../../styles/theme/dark.css.ts";
+import ThemeToggle from "../common/ThemeToggle.tsx";
 
 const navMenus: { path: string; label: string }[] = [
   { path: "/", label: "Home" },
@@ -15,21 +17,12 @@ const navMenus: { path: string; label: string }[] = [
 ];
 
 const Header = () => {
-  const handleClickChangeTheme = () => {
-    const currentThemeClass = document.body.classList[0];
-    document.body.classList.remove(currentThemeClass);
-    if (currentThemeClass.includes("dark")) {
-      document.body.classList.add(lightThemeClass);
-    } else {
-      document.body.classList.add(darkThemeClass);
-    }
-  };
   const navigate = useNavigate();
   const location = useLocation();
   return (
     <header className={headerContainer}>
       <div className={headerLogo} onClick={() => navigate("/")}>
-        MentoQL
+        MENTO<span className={headerSpot}>.</span>QL
       </div>
       <nav className={headerNavMenusContainer}>
         {navMenus.map(({ path, label }, index) => (
@@ -47,7 +40,7 @@ const Header = () => {
           </div>
         ))}
       </nav>
-      <button onClick={handleClickChangeTheme}>toggle</button>
+      <ThemeToggle />
     </header>
   );
 };

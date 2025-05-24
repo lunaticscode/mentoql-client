@@ -3,7 +3,7 @@ import { themeVars } from "./index.css.ts";
 
 export const lightThemeClass = createTheme(themeVars, {
   color: {
-    primary: "#2563EB",
+    primary: "#2ed21d",
     secondary: "#7C3AED",
     ghost: "#F3F4F6",
     white: "#FFFFFF",
