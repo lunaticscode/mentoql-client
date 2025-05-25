@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { themeVars } from "../theme/index.css";
+import { themeVars } from "../theme/index.css.ts";
 
 export const calendarContainer = style({
   width: "100%",

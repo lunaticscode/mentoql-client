@@ -9,12 +9,13 @@ import { darkThemeClass } from "../../styles/theme/dark.css";
 
 const ThemeToggle = () => {
   const [isDark, setIsDark] = useState(() => {
+    if (typeof window === undefined) return;
     return document.body.classList.contains(darkThemeClass);
   });
 
   useEffect(() => {
     const nextTheme = isDark ? darkThemeClass : lightThemeClass;
-
+    if (typeof window === undefined) return;
     document.body.classList.remove(darkThemeClass, lightThemeClass);
     document.body.classList.add(nextTheme);
   }, [isDark]);

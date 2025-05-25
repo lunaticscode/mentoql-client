@@ -9,6 +9,7 @@ const Container: FC<PageContainerProps> = ({ children }) => {
 interface PageTitleProps extends PropsWithChildren {
   icon?: ReactNode;
 }
+
 const Title: FC<PageTitleProps> = ({ children, icon }) => {
   return (
     <h2 className={pageTitle}>

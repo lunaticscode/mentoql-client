@@ -3,7 +3,9 @@
 // import PageTitle from "../components/common/PageTitle";
 // import { useToast } from "../components/common/Toast";
 import Page from "../components/common/Page";
+import { DashboardIcon } from "../components/icons";
 import HomeDashboard from "../components/pages/home/Dashboard";
+import { pageTitleSvgIcon } from "../styles/layout/page.css";
 
 const HomePage = () => {
   // const toast = useToast();
@@ -15,7 +17,9 @@ const HomePage = () => {
       <Calendar.Root defaultDate={new Date()}>
         <Calendar.Body />
       </Calendar.Root> */}
-      <Page.Title>Dashboard</Page.Title>
+      <Page.Title icon={<DashboardIcon className={pageTitleSvgIcon} />}>
+        Dashboard
+      </Page.Title>
       <HomeDashboard />
     </Page.Container>
   );

@@ -1,6 +1,5 @@
-import { useMemo } from "react";
 import useMediaQuery from "./internal/useMediaQuery";
-import useDebounce from "./useDebounce";
+
 type UseDeviceSizeReturn = {
   mobile: boolean;
   tablet: boolean;

@@ -1,5 +1,5 @@
 import { createTheme } from "@vanilla-extract/css";
-import { themeVars } from "./index.css";
+import { themeVars } from "./index.css.ts";
 
 export const darkThemeClass = createTheme(themeVars, {
   color: {

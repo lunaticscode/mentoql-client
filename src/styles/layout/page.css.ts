@@ -1,5 +1,5 @@
 import { style, keyframes } from "@vanilla-extract/css";
-import { themeVars } from "../theme/index.css";
+import { themeVars } from "../theme/index.css.ts";
 
 const fadeIn = keyframes({
   from: { opacity: 0 },
@@ -16,6 +16,13 @@ export const pageContainer = style({
 });
 
 export const pageTitle = style({
+  display: "flex",
+  columnGap: 5,
+  alignItems: " center",
   marginBottom: "20px",
   fontSize: 40,
+});
+export const pageTitleSvgIcon = style({
+  width: 40,
+  stroke: themeVars.color.primary,
 });

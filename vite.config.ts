@@ -4,9 +4,11 @@ import ssgGeneratorPlugin from "./ssgGeneratorPlugin";
 import { API_PROXY_PATH } from "./src/consts/api";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
-export default defineConfig(() => {
+export default defineConfig((config) => {
+  const plugins = [react, vanillaExtractPlugin, ssgGeneratorPlugin];
+  if (config.isSsrBuild) plugins.pop();
   return {
-    plugins: [react(), vanillaExtractPlugin(), ssgGeneratorPlugin()],
+    plugins: plugins.map((p) => p()),
     server: {
       proxy: {
         [API_PROXY_PATH]: {

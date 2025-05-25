@@ -2,6 +2,8 @@ import { useState } from "react";
 import Page from "../components/common/Page";
 import Paginator from "../components/common/Paginator";
 import Calendar from "../components/common/Calendar";
+import { CalendarIcon } from "../components/icons";
+import { pageTitleSvgIcon } from "../styles/layout/page.css";
 
 const SchedulePage = () => {
   const [page, setPage] = useState<number>(1);
@@ -10,7 +12,9 @@ const SchedulePage = () => {
   };
   return (
     <Page.Container>
-      <Page.Title>SchedulePage</Page.Title>
+      <Page.Title icon={<CalendarIcon className={pageTitleSvgIcon} />}>
+        Schedule
+      </Page.Title>
       <Calendar.Root>
         <Calendar.Header />
         <Calendar.Body />

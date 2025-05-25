@@ -15,7 +15,6 @@ const isEqualByMode = (
     targetDate.getMonth(),
     targetDate.getDate(),
   ];
-  console.log(mode);
   const mapModeToEqaul: Record<CalendarMode, () => boolean> = {
     month: () => {
       return year1 === year2 && month1 === month2 && date1 === date2;

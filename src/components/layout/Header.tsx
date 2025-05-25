@@ -5,9 +5,7 @@ import {
   headerNavMenusContainer,
   headerNavMenu,
   headerSpot,
-} from "../../styles/layout/header.css.ts";
-import { lightThemeClass } from "../../styles/theme/light.css.ts";
-import { darkThemeClass } from "../../styles/theme/dark.css.ts";
+} from "../../styles/layout/header.css";
 import ThemeToggle from "../common/ThemeToggle.tsx";
 
 const navMenus: { path: string; label: string }[] = [
