@@ -9,10 +9,12 @@ interface Profile {
 
 const useProfileStore = create<Profile>()(
   persist(
-    (_set) => ({
+    (set) => ({
       email: undefined,
       name: undefined,
       picture: undefined,
+      setProfile: (newProfile: Profile) =>
+        set((prev) => ({ ...prev, ...newProfile })),
     }),
     {
       name: "user-profile",

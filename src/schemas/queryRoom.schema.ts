@@ -20,7 +20,7 @@ const queryRoomModelSchema = createQueryRoomInputSchema.extend({
   owner: z.string(),
 });
 
-const queryRoomDetailModelSchema = queryRoomModelSchema.extend({
+export const queryRoomDetailModelSchema = queryRoomModelSchema.extend({
   questions: z.array(questionOutputSchema),
 });
 

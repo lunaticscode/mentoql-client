@@ -1,7 +1,8 @@
 import axios, { isAxiosError } from "axios";
-import { API_PROXY_PATH } from "../consts/api";
+import { API_PROXY_PATH, MOCK_API_PROXY_PATH } from "../consts/api";
 
-axios.defaults.baseURL = API_PROXY_PATH;
+axios.defaults.baseURL =
+  import.meta.env.MODE === "test" ? MOCK_API_PROXY_PATH : API_PROXY_PATH;
 axios.defaults.timeout = 10000;
 axios.defaults.headers.common["Content-Type"] = "application/json";
 

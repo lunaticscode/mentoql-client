@@ -11,6 +11,7 @@ const useMediaQuery = (device: Devices) => {
   const query = QUERIES[device];
 
   const getMatches = () => {
+    if (typeof window === undefined) false;
     return window.matchMedia(query).matches;
   };
 
@@ -22,6 +23,7 @@ const useMediaQuery = (device: Devices) => {
   };
 
   useEffect(() => {
+    if (typeof window === undefined) return;
     const matchMedia = window.matchMedia(query);
     matchMedia.addEventListener("change", handleResize);
     return () => {

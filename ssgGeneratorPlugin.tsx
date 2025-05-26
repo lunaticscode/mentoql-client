@@ -69,6 +69,7 @@ const ssgGeneratorPlugin = (): Plugin => {
         //* 커버가 100% 안된다 tlqnfp 우째야되노
         globalThis.window = dom.window as unknown as Window & typeof globalThis;
         globalThis.document = dom.window.document;
+        globalThis.window.matchMedia = dom.window.matchMedia;
 
         const ssrEntry = resolve(process.cwd(), "dist-ssr/App.js");
         const { default: App } = await import(pathToFileURL(ssrEntry).href);

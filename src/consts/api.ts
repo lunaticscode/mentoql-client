@@ -1,5 +1,5 @@
 const API_PROXY_PATH = "/api";
-
+const MOCK_API_PROXY_PATH = "http://localhost:8000";
 const API_PATH = {
   CREATE_MENTO_SEED: "/mento/seed",
   CREATE_QUERY_ROOM: "/query-room",
@@ -31,4 +31,4 @@ const API_TOAST_MESSAGE = {
   },
 };
 
-export { API_PROXY_PATH, API_PATH, API_TOAST_MESSAGE };
+export { API_PROXY_PATH, API_PATH, MOCK_API_PROXY_PATH, API_TOAST_MESSAGE };

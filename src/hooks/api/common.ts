@@ -15,6 +15,7 @@ export const getApi = async <Input, Output>(
     const apiRequest = await api.get<Output>(path, { params });
     if (apiRequest.status === HttpStatusCode.Ok) {
       const parsed = outputSchema.safeParse(apiRequest.data);
+
       if (!parsed.success) {
         throw new Error("INVALID_OUTPUT_STATUS");
       }
